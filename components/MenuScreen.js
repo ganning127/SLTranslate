@@ -5,7 +5,7 @@ import {
     Dimensions
 } from "react-native";
 import React from "react";
-import { Image, ScrollView, Button, Box, Text, Heading, VStack, HStack, Icon, Divider, Spacer, Flex } from 'native-base';
+import { Image, ScrollView, Button, Box, Text, Heading, VStack, HStack, Icon, Spacer, Flex } from 'native-base';
 
 export default function MenuScreen({ navigation }) {
     const windowWidth = Dimensions.get('window').width;
@@ -96,8 +96,20 @@ export default function MenuScreen({ navigation }) {
                                 </HStack>
                             </VStack>
 
-                            <Button px="10" mt="4" mx='auto' onPress={() => navigation.navigate("Home")}>Go Back</Button>
 
+                            <HStack mb='4'>
+                                <Button px="10" mt="4" mx='auto' variant='none' onPress={() => navigation.navigate("Instructions")}>
+                                    <Text color="#ffa36e" fontBold="bold" fontSize="lg">
+                                        Instructions
+                                    </Text>
+                                </Button>
+
+                                <Button px="10" mt="4" mx='auto' bg="#ffa36e" onPress={() => navigation.navigate("Home")} rounded='lg'>
+                                    <Text color="#ffffff" fontBold="bold" fontSize="lg" >
+                                        Go Back
+                                    </Text>
+                                </Button>
+                            </HStack>
                         </Box>
                     </Box>
                 </SafeAreaView>

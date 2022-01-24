@@ -4,11 +4,10 @@ import {
   ImageBackground,
   StyleSheet,
   Image,
-  TouchableOpacity,
 } from "react-native";
 import React from "react";
 import { Icon } from "react-native-elements";
-import { Button, Box, Text, Heading } from 'native-base';
+import { Button, Box, Text, Heading, HStack } from 'native-base';
 
 export default function HomeScreen({ navigation }) {
   return (
@@ -38,10 +37,7 @@ export default function HomeScreen({ navigation }) {
             // styles={styles.image}
             />
           </Box>
-          <Box
-
-          >
-
+          <Box>
             <Button bg="#ffa36e" _pressed={{ bg: "#fcbc97" }} onPress={() => navigation.navigate("Menu")} borderRadius="20px" px="8" shadow="1" mx="auto">
               <Text fontSize="xl" color="white" fontWeight="bold">Get Started</Text>
             </Button>
