@@ -32,7 +32,7 @@ export default function MenuScreen({ navigation }) {
                         </Flex>
 
                         <Box mt="6">
-                            <Pressable onPress={() => navigation.navigate("Translate")}>
+                            <Pressable onPress={() => navigation.navigate("Translator")}>
                                 <Box bg="#E6F6FF" pt={4} rounded="10">
                                     <Text fontSize="2xl" fontWeight="bold" color="orange.300" textAlign="center">
                                         Translate 🌐

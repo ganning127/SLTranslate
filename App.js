@@ -7,6 +7,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "./components/HomeScreen";
 import MenuScreen from "./components/MenuScreen";
 import InstructionScreen from './components/InstructionScreen';
+import TranslatorScreen from './components/TranslatorScreen';
 // import TranslatorScreen from "./components/TranslatorScreen";
 import { NativeBaseProvider, Box } from 'native-base';
 const Stack = createNativeStackNavigator();
@@ -25,6 +26,11 @@ export default function App() {
           <Stack.Screen
             name="Menu"
             component={MenuScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Translator"
+            component={TranslatorScreen}
             options={{ headerShown: false }}
           />
           <Stack.Screen
