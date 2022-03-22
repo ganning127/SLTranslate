@@ -39,6 +39,7 @@ export default function TranslatorScreen({ navigation }) {
     const [model, setModel] = useState(null);
     const [metadata, setMetadata] = useState(null);
     const [prediction, setPrediction] = useState(null);
+    const [predictionMessage, setPredictionMessage] = useState("Loading prediction...");
     const [transcript, setTranscript] = useState(null);
 
     useEffect(() => {
@@ -99,6 +100,11 @@ export default function TranslatorScreen({ navigation }) {
             }
 
             setPrediction(prediction);
+            const predictionSorted = prediction.sort((a, b) => b.probability - a.probability);
+            setPredictionMessage(
+                `${predictionSorted[0].className} ${predictionSorted[0].probability.toFixed(2)}%, ${predictionSorted[1].className} ${predictionSorted[1].probability.toFixed(2)}%, ${predictionSorted[2].className} ${predictionSorted[2].probability.toFixed(2)}%`
+            );
+
             setTranscript(transcriptRes);
 
             requestAnimationFrame(streamLoop);
@@ -131,7 +137,7 @@ export default function TranslatorScreen({ navigation }) {
                         style={{ flex: 2, justifyContent: "center", alignItems: "center" }}
                     >
                         <Text
-                            style={{ fontSize: 24, fontFamily: "Avenir", fontWeight: "500" }}
+                            style={{ fontSize: 24, fontWeight: "500" }}
                         >
                             Translate
                         </Text>
@@ -182,13 +188,7 @@ export default function TranslatorScreen({ navigation }) {
                     }}
                 >
                     <Text>
-                        {prediction
-                            ? prediction.reduce((mostLikely, current) =>
-                                mostLikely.probability < current.probability
-                                    ? current
-                                    : mostLikely
-                            ).className
-                            : "Loading prediction...."}
+                         Predicted Letters: {predictionMessage}
                     </Text>
                 </View>
 
