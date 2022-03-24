@@ -2,10 +2,11 @@ import {
     SafeAreaView,
     StyleSheet,
     Pressable,
-    Dimensions
+    Dimensions,
+    Linking,
 } from "react-native";
 import React from "react";
-import { Image, ScrollView, Button, Box, Text, Heading, VStack, HStack, Icon, Spacer, Flex } from 'native-base';
+import { Image, ScrollView, Button, Box, Text, Heading, VStack, HStack, Link, Spacer, Flex } from 'native-base';
 
 export default function MenuScreen({ navigation }) {
     const windowWidth = Dimensions.get('window').width;
@@ -32,6 +33,7 @@ export default function MenuScreen({ navigation }) {
                         </Flex>
 
                         <Box mt="6">
+
                             <Pressable onPress={() => navigation.navigate("Translator")}>
                                 <Box bg="#E6F6FF" pt={4} rounded="10">
                                     <Text fontSize="2xl" fontWeight="bold" color="orange.300" textAlign="center">
@@ -49,12 +51,15 @@ export default function MenuScreen({ navigation }) {
                             </Pressable>
 
                             <VStack space={3} mt="4">
-                                <Pressable onPress={() => navigation.navigate("Words")}>
+
+                                <Pressable onPress={() => Linking.openURL('https://www.youtube.com/watch?v=v1desDduz5M')}>
+
                                     <Box bg="#FFE3D3" p={4} rounded="10">
+                                        {/* <Link href="https://nativebase.io"> */}
                                         <HStack>
                                             <Text fontWeight="bold" color="#393939" fontSize="xl">Learn Words</Text>
                                             <Spacer />
-                                            <Text color="#393939" fontWeight="bold" bg="white" px="2" borderRadius="10px" alignSelf="center">20 min</Text>
+                                            <Text color="#393939" fontWeight="bold" bg="white" px="2" borderRadius="10px" alignSelf="center">13 min</Text>
                                         </HStack>
 
                                         <Image
@@ -62,14 +67,16 @@ export default function MenuScreen({ navigation }) {
                                             alt="Learn words picture"
                                             style={styles.mxAuto}
                                         />
+                                        {/* </Link> */}
                                     </Box>
+
                                 </Pressable>
                                 <HStack justifyContent="space-between">
 
                                     <Box bg="#E6F6FF" p={4} rounded="10" w={windowWidth / 2 - 30}>
-                                        <Pressable onPress={() => navigation.navigate("Letters")}>
+                                        <Pressable onPress={() => Linking.openURL('https://www.youtube.com/watch?v=cGavOVNDj1s')}>
                                             <Text fontWeight="bold" color="#393939" fontSize="md">Learn Letters</Text>
-                                            <Text color="#393939" fontWeight="bold" bg="white" px="2" borderRadius="10px" alignSelf="flex-start" mt="1">6 min</Text>
+                                            <Text color="#393939" fontWeight="bold" bg="white" px="2" borderRadius="10px" alignSelf="flex-start" mt="1">5 min</Text>
                                             <Image
                                                 source={require("../assets/letters.png")}
                                                 alt="Alternate Text"
@@ -79,12 +86,11 @@ export default function MenuScreen({ navigation }) {
                                         </Pressable>
                                     </Box>
 
-
                                     <Box bg="#E6F6FF" p={4} rounded="10" w={windowWidth / 2 - 30}>
-                                        <Pressable onPress={() => navigation.navigate("Speakers")}>
+                                        <Pressable onPress={() => Linking.openURL('https://www.youtube.com/watch?v=ZK3jSXYBNak')}>
 
                                             <Text fontWeight="bold" color="#393939" fontSize="md" >Meet Speakers</Text>
-                                            <Text color="#393939" fontWeight="bold" bg="white" px="2" borderRadius="10px" alignSelf="flex-start" mt="1">13 min</Text>
+                                            <Text color="#393939" fontWeight="bold" bg="white" px="2" borderRadius="10px" alignSelf="flex-start" mt="1">4 min</Text>
                                             <Image
                                                 source={require("../assets/speakers.png")}
                                                 alt="Speakers"
@@ -98,17 +104,18 @@ export default function MenuScreen({ navigation }) {
 
 
                             <HStack mb='4'>
+                                <Button px="10" mt="4" mx='auto' bg="#ffa36e" onPress={() => navigation.navigate("Home")} rounded='lg'>
+                                    <Text color="#ffffff" fontBold="bold" fontSize="lg" >
+                                        Go Back
+                                    </Text>
+                                </Button>
                                 <Button px="10" mt="4" mx='auto' variant='none' onPress={() => navigation.navigate("Instructions")}>
                                     <Text color="#ffa36e" fontBold="bold" fontSize="lg">
                                         Instructions
                                     </Text>
                                 </Button>
 
-                                <Button px="10" mt="4" mx='auto' bg="#ffa36e" onPress={() => navigation.navigate("Home")} rounded='lg'>
-                                    <Text color="#ffffff" fontBold="bold" fontSize="lg" >
-                                        Go Back
-                                    </Text>
-                                </Button>
+
                             </HStack>
                         </Box>
                     </Box>

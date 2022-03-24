@@ -5,7 +5,6 @@ import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react";
 import {
     StyleSheet,
-    Text,
     View,
     TouchableOpacity,
     Dimensions,
@@ -17,10 +16,10 @@ import { cameraWithTensors } from "@tensorflow/tfjs-react-native";
 import { loadLayersModel, ready, scalar, tidy } from "@tensorflow/tfjs";
 import { cropTensor } from "@teachablemachine/image/src/utils/tf";
 import { Icon } from "react-native-elements";
+import { Text } from 'native-base'
 
-
-// const MODEL_URL = "https://teachablemachine.withgoogle.com/models/OBWpGU-Yu/";
-const MODEL_URL = "https://teachablemachine.withgoogle.com/models/EYAXePbkj/";
+const MODEL_URL = "https://teachablemachine.withgoogle.com/models/OBWpGU-Yu/";
+// const MODEL_URL = "https://teachablemachine.withgoogle.com/models/EYAXePbkj/";
 let transcriptRes = [];
 let push_status = false;
 let temp_letter;
@@ -59,28 +58,28 @@ export default function TranslatorScreen({ navigation }) {
             const logits = tidy(() => {
                 const nextImageTensorCropped = cropTensor(nextImageTensor, false);
                 const batchedNextImage = nextImageTensorCropped.expandDims(0);
-
+                console.log(nextImageTensorCropped)
                 return model.predict(
-                    batchedNextImage.toFloat().div(scalar(127)).sub(scalar(1))
+                    batchedNextImage.toFloat().div(scalar(224)).sub(scalar(1))
                 );
             });
 
             const data = await logits.data();
 
-            const prediction = [];
+            const pred = [];
             for (let i = 0; i < data.length; i++) {
-                prediction.push({
+                pred.push({
                     className: metadata.labels[i],
                     probability: data[i],
                 });
             }
 
-            let max = prediction[0].probability;
-            let pred_letter = prediction[0].className;
-            for (let i = 1; i < prediction.length; ++i) {
-                if (prediction[i].probability > max) {
-                    max = prediction[i].probability;
-                    pred_letter = prediction[i].className;
+            let max = pred[0].probability;
+            let pred_letter = pred[0].className;
+            for (let i = 1; i < pred.length; ++i) {
+                if (pred[i].probability > max) {
+                    max = pred[i].probability;
+                    pred_letter = pred[i].className;
                 }
             }
 
@@ -99,8 +98,8 @@ export default function TranslatorScreen({ navigation }) {
                 push_status = false;
             }
 
-            setPrediction(prediction);
-            const predictionSorted = prediction.sort((a, b) => b.probability - a.probability);
+            setPrediction(pred);
+            const predictionSorted = pred.sort((a, b) => b.probability - a.probability);
             setPredictionMessage(
                 `${predictionSorted[0].className} ${predictionSorted[0].probability.toFixed(2)}%, ${predictionSorted[1].className} ${predictionSorted[1].probability.toFixed(2)}%, ${predictionSorted[2].className} ${predictionSorted[2].probability.toFixed(2)}%`
             );
@@ -129,7 +128,7 @@ export default function TranslatorScreen({ navigation }) {
                     }}
                 >
                     <View style={{ flex: 1, justifyContent: "center" }}>
-                        <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+                        <TouchableOpacity onPress={() => navigation.navigate("Menu")}>
                             <Icon name="arrow-left" type="simple-line-icon" color="black" />
                         </TouchableOpacity>
                     </View>
@@ -137,7 +136,7 @@ export default function TranslatorScreen({ navigation }) {
                         style={{ flex: 2, justifyContent: "center", alignItems: "center" }}
                     >
                         <Text
-                            style={{ fontSize: 24, fontWeight: "500" }}
+                            fontSize='2xl' fontWeight='bold'
                         >
                             Translate
                         </Text>
@@ -188,7 +187,7 @@ export default function TranslatorScreen({ navigation }) {
                     }}
                 >
                     <Text>
-                         Predicted Letters: {predictionMessage}
+                        Predicted Letters: {predictionMessage}
                     </Text>
                 </View>
 
@@ -203,7 +202,7 @@ export default function TranslatorScreen({ navigation }) {
                             paddingTop: 20,
                         }}
                     >
-                        <Text>
+                        <Text fontSize='3xl' letterSacing='2xl'>
                             {transcript ? transcript.join("") : "Loading prediction...."}
                         </Text>
                     </View>
