@@ -1,13 +1,15 @@
-node_modules/
-.expo/
-npm-debug.*
-*.jks
-*.p8
-*.p12
-*.key
-*.mobileprovision
-*.orig.*
-web-build/
-.vscode
-.DS_Store
+.vscode/*
 
+client/node_modules/
+client/.expo/
+client/npm-debug.*
+client/*.jks
+client/*.p8
+client/*.p12
+client/*.key
+client/*.mobileprovision
+client/*.orig.*
+client/web-build/
+
+# macOS
+client/.DS_Store
